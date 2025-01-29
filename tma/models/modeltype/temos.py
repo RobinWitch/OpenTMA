@@ -246,7 +246,7 @@ class TEMOS(BaseModel):
 
         self.t2m_textencoder.load_state_dict(t2m_checkpoint["text_encoder"])
 
-        self.t2m_moveencoder.load_state_dict(t2m_checkpoint["movement_encoder"])
+        # self.t2m_moveencoder.load_state_dict(t2m_checkpoint["movement_encoder"])
 
         self.t2m_motionencoder.load_state_dict(t2m_checkpoint["motion_encoder"])
 
@@ -725,7 +725,8 @@ class TEMOS(BaseModel):
                 "only_pose_fusion",
             ]:
                 # use t2m evaluators
-                rs_set = self.t2m_eval(batch)
+                pass
+                # rs_set = self.t2m_eval(batch)
             elif self.condition == "action":
                 # use a2m evaluators
                 rs_set = self.a2m_eval(batch)

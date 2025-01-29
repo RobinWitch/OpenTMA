@@ -1696,6 +1696,7 @@ class Text2MotionDatasetV2(data.Dataset):
         self.min_motion_length = min_motion_length
         self.max_text_len = max_text_len
         self.unit_length = unit_length
+        self.fps = 30
 
         data_dict = {}
         id_list = []
@@ -1745,7 +1746,7 @@ class Text2MotionDatasetV2(data.Dataset):
                     raise NotImplementedError
 
                 if (len(motion)) < self.min_motion_length or (len(motion) >=
-                                                                200):
+                                                                10*self.fps):
                     bad_count += 1
                     continue
                 text_data = []
@@ -1771,11 +1772,11 @@ class Text2MotionDatasetV2(data.Dataset):
                             text_data.append(text_dict)
                         else:
                             try:
-                                n_motion = motion[int(f_tag * 20):int(to_tag *
-                                                                        20)]
+                                n_motion = motion[int(f_tag * self.fps):int(to_tag *
+                                                                        self.fps)]
                                 if (len(n_motion)
                                     ) < self.min_motion_length or (
-                                        (len(n_motion) >= 200)):
+                                        (len(n_motion) >= 10*self.fps)):
                                     
                                     continue
                                 new_name = (
